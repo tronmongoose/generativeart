@@ -17,7 +17,7 @@ for (let i =0; i < 100; i++){
     context.fillRect(0, 0, width, height);
 
     context.fillStyle = 'blue';
-    context.width = 60 //(no idea how to adjust this, "linewidth doesnt work" - EH)
+    //context.lineWidth = 10  //(no idea how to adjust this, "linewidth doesnt work" - EH)
     
     for (let i = 0; i < circles.length; i++) {
       const circle1 = circles[i];
@@ -27,15 +27,19 @@ for (let i =0; i < 100; i++){
         const dist = getDistance(circle1.x, circle2.x, circle1.y, circle2.y);
 
         if(dist < 250){
-
+          context.lineWidth = 10 - dist/25;
           context.beginPath();
           context.moveTo(circle1.x, circle1.y);
           context.lineTo(circle2.x, circle2.y);
           context.stroke();
+          context.fillStyle = 'red';
+          context.fill();
+
         }
       } 
     }
 
+    context.lineWidth = 12;
     circles.forEach(circle => {
       circle.draw(context);
       circle.move();
@@ -69,6 +73,8 @@ class Circle {
       context.beginPath();
       context.arc(this.x, this.y, this.radius, 0, Math.PI *2 );
       context.stroke();
+      context.fillStyle = 'green';
+      context.fill();
 
     }
 
